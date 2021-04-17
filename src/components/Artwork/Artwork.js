@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import AppContext from '../../AppContext.js';
+import React from 'react';
 import { useAppContext } from '../../AppContext.js';
 import { Link } from 'react-router-dom';
 import './Artwork.scss';
