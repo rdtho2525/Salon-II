@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import AppContext from '../../AppContext.js';
 import { fetchArtObject } from '../../api.js'
 import './ArtDetails.scss';
 
