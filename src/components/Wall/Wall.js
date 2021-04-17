@@ -2,24 +2,25 @@ import React from 'react';
 import './Wall.scss';
 import Artwork from '../Artwork/Artwork';
 
-const Wall = ({ artworks }) => {
+const Wall = ({ artPieces }) => {
 
   // const salonTemplates = []; This will eventually contain multiple templates to choose from.
 
-  const artworksToDisplay = artworks.map((artwork, index) => {
+  const artPiecesToDisplay = artPieces.map((piece, index) => {
       return (
         <Artwork
+        title={piece.title}
         wallLocation={`div${index}`}
-        key={artwork.objectID}
-        id={artwork.objectID}
-        url={artwork.primaryImageSmall}
+        key={piece.objectID}
+        id={piece.objectID}
+        url={piece.primaryImageSmall}
         />
       )
   })
 
   return (
       <section className='salonTemplate'>
-        {artworksToDisplay}
+        {artPiecesToDisplay}
       </section>
   )
 
