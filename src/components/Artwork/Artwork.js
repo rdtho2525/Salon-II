@@ -9,14 +9,22 @@ import '../Wall/Wall.scss';
 const Artwork = ({ artPiece, id, url, title, wallLocation }) => {
   const [isFavorited, setIsFavorited] = useState(false);
   const [state, dispatch] = useAppContext();
-  // const actionType = state.favoriteStatus === 'clear' ? 'ADD_TO_FAVORITES' : 'REMOVE_FROM_FAVORITES';
+  const actionType = isFavorited === false ? 'ADD_TO_FAVORITES' : 'REMOVE_FROM_FAVORITES';
+  
+  const toggleFavorite = () => {
+    isFavorited === false ? setIsFavorited(true) : setIsFavorited(false);
+  }
+
   const checkFavStatus = () => {
     return isFavorited ? <FavoriteIcon/> : <FavoriteBorderIcon/>
   }
 
   return (
     <>
-      <button onClick={() => dispatch({ type: 'ADD_TO_FAVORITES', payload: artPiece })}>{checkFavStatus()}</button>
+      <button onClick={() => {
+        dispatch({ type: actionType, payload: artPiece })
+        toggleFavorite()
+      }}>{checkFavStatus()}</button>
       <Link to={`/${id}`} data={id} className={`img-container ${wallLocation}`}>
         <img src={url} alt={`${title}_${id}`}/>
       </Link>
@@ -26,6 +34,3 @@ const Artwork = ({ artPiece, id, url, title, wallLocation }) => {
 }
 
 export default Artwork;
-
-// src/assets/clear_heart.png
-// src/assets/clear_heart.png
