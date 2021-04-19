@@ -7,6 +7,7 @@ const initialState = {
   artPieces: [],
   favorites: [],
   searchTerms: [],
+  isFavorited: false,
   error: ''
 }
 
@@ -20,10 +21,8 @@ const reducer = (state, action) => {
       return state.artPieces.filter(piece => piece.objectID !== action.payload)
     case 'ADD_TO_FAVORITES':
       const pastFavorites = JSON.parse(localStorage.getItem('favorites'));
-      const allFavorites = JSON.stringify([...pastFavorites, action.payload]);
-      const newFavorites = JSON.stringify([action.payload]);
-      pastFavorites ? localStorage.setItem('favorites', allFavorites) : localStorage.setItem('favorites', newFavorites);
-      return {...state, favorites: [...pastFavorites, action.payload]}
+      pastFavorites ? localStorage.setItem('favorites', JSON.stringify([...pastFavorites, action.payload])) : localStorage.setItem('favorites', JSON.stringify([action.payload]));
+      return {...state, favorites: [...pastFavorites, action.payload], isFavorited: 'true'} 
   }
 }
 
