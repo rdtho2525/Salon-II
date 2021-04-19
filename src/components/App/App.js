@@ -1,5 +1,5 @@
 import './App.scss';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { useAppContext } from '../../AppContext.js';
 import { shuffleItems } from '../../utilities.js';
@@ -7,6 +7,7 @@ import { getAllIDs, fetchArtObject } from '../../api.js'
 import Wall from '../Wall/Wall';
 import Header from '../Header/Header';
 import ArtDetails from '../ArtDetails/ArtDetails.js';
+import FavoriteSection from '../FavoritesSection/FavoriteSection.js';
 
 function App() {
   const [state, dispatch] = useAppContext();
@@ -60,21 +61,25 @@ function App() {
   return (
       <div className="App">
         <Header />
-        <Route 
-          exact path="/"
-          render={() => (
-            <section className='wall-container'>
-              <Wall artPieces={state.artPieces} />
-              {console.log(state.artPieces)}
-            </section>
-          )}
-          /> 
-        <Route exact path='/:artPieceID' render={({ match }) => {
-          const { artPieceID } = match.params;
-          return <ArtDetails artPieceID={artPieceID} />
-        }} />
-
-       
+        <Switch>
+          <Route 
+            exact path="/"
+            render={() => (
+              <section className='wall-container'>
+                <Wall artPieces={state.artPieces} />
+                {/* {console.log(state.artPieces)} */}
+              </section>
+            )}
+            /> 
+          <Route exact path="/favorites" render={() => {
+            console.log(state.favorites)
+            return <FavoriteSection favorites={state.favorites}/>
+          }}/>
+          <Route exact path='/:artPieceID' render={({ match }) => {
+            const { artPieceID } = match.params;
+            return <ArtDetails artPieceID={artPieceID} />
+          }} />
+        </Switch>
       </div>
   );
 }
