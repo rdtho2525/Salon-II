@@ -50,12 +50,20 @@ function App() {
       .catch(error => ({...state, error }));
   }
 
+  const getFavorites = () => {
+    dispatch({
+      type: 'GET_FAVORITES',
+      payload: JSON.parse(localStorage.getItem('favorites'))
+    })
+  }
+
   useEffect(() => {
     getIDs(searchTerm);
   }, [])
 
-  useEffect(() => {
-    state.ids.length && collectArtPieces();
+  useEffect( async () => {
+    await getFavorites();
+    await collectArtPieces();
   }, [state.ids])
 
   return (
