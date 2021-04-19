@@ -1,6 +1,8 @@
 import React from 'react';
 import './Wall.scss';
 import Artwork from '../Artwork/Artwork';
+import Carousel from "react-elastic-carousel";
+
 
 const Wall = ({ artPieces }) => {
 
@@ -9,6 +11,7 @@ const Wall = ({ artPieces }) => {
   const artPiecesToDisplay = artPieces.map((piece, index) => {
       return (
         <Artwork
+        artPiece={piece}
         title={piece.title}
         wallLocation={`div${index}`}
         key={piece.objectID}
@@ -20,7 +23,9 @@ const Wall = ({ artPieces }) => {
 
   return (
       <section className='salonTemplate'>
-        {artPiecesToDisplay}
+        <Carousel>
+          {artPiecesToDisplay}
+        </Carousel>
       </section>
   )
 
