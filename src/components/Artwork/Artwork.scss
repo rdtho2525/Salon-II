@@ -1,3 +1,8 @@
+.landing-section {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .img-container {
   display: flex;
 }
@@ -10,5 +15,3 @@ img {
   box-shadow: 0px 3px 6px 3px grey;
   margin: auto;
 }
-
-
