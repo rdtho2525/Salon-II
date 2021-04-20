@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useState } from 'react';
 
 const AppContext = createContext();
 
@@ -18,6 +18,9 @@ const reducer = (state, action) => {
       return {...state, artPieces: action.payload}
     case 'GET_SINGLE_PIECE':
       return state.artPieces.filter(piece => piece.objectID !== action.payload)
+    case 'GET_FAVORITES':
+      // const uniqueFavorites = action.payload.filter((item, index, arr) => arr.indexOf(item) === index)
+      return {...state, favorites: action.payload}
     case 'ADD_TO_FAVORITES':
       const pastFavorites = JSON.parse(localStorage.getItem('favorites'));
       pastFavorites ? localStorage.setItem('favorites', JSON.stringify([...pastFavorites, action.payload])) : localStorage.setItem('favorites', JSON.stringify([action.payload]));
