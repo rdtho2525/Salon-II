@@ -1,0 +1,32 @@
+.favorite {
+  width: 22%;
+  max-width: 300px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  margin: 25px 10px;
+}
+
+.favorite-image {
+  // height: auto;
+  max-height: 70%;
+
+}
+
+.favorite-detail {
+  height: 30%;
+  width: 100%;
+}
+
+.favorite-detail > h2,
+.favorite-detail > p {
+  color: black;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 3vh;
+}
+
+.favorite-title {
+  font-weight: bold;
+}

@@ -1,10 +1,15 @@
 @import '../../index.scss';
 
-header {
+.nav-header {
+  height: 7em;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  // position: fixed;
+  // top: 0;
+  background-color: white;
   border-bottom: solid black 1px;
+  padding: 20px;
 
   .logo-container {
     width: 100px;
@@ -20,17 +25,24 @@ header {
     }
   }
 
+  .header-title {
+    width: 7em;
+  }
+
+  a {
+    height: 1em;
+  }
+
   h2 {
     @include headerButton;
-    font-size: 20px;
-    margin-top: 22px;
+    font-size: 3vh;
+    // margin-top: 22px;
     font-weight:  100;
     text-transform: none;
     padding: 0;
 
     &:hover {
       @include hoverButton;
-      margin-top: 20px;
     }
   }
 

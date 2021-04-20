@@ -22,12 +22,12 @@ const ArtDetails = ({ artPieceID }) => {
     <>
       <section className="art-details">
         <img className="details-image" src={selectedArt.primaryImage} alt={selectedArt.title}/>
-        <aside>
+        <aside className="full-details">
           <h2>Featured Artifact:</h2>
           <h3>"{selectedArt.title}"</h3>
           <p>c. {selectedArt.objectBeginDate}-{selectedArt.objectEndDate}</p>
           <p>{selectedArt.artistDisplayName}</p>
-          <p>{selectedArt.medium}</p>
+          {/* <p>{selectedArt.medium}</p> */}
         </aside>
       </section>
     </>

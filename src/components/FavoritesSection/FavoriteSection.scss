@@ -1,0 +1,22 @@
+* {
+  // border: 1px solid red;
+}
+
+a {
+  text-decoration: none;
+}
+
+.favorites-container {
+  height: 90vh;
+  width: 95vw;
+  // min-width: 1283px;
+  display: flex;
+  text-align: start;
+  align-items: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-basis: auto;
+  margin: 0 auto;
+  margin-top: 2vh;
+  overflow: scroll;
+}
