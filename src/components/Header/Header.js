@@ -5,9 +5,9 @@ import './Header.scss';
 const Header = () => {
 
   return (
-    <header>
+    <header className="nav-header">
       <Link to="/" className="logo-container">
-        <h2>Met in a Minute</h2>
+        <h2 className="header-title">Met in a Minute</h2>
       </Link>
       <Link to="/favorites" className="user-buttons">
         <h2>favorites</h2>
