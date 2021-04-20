@@ -62,8 +62,12 @@ function App() {
   }, [])
 
   useEffect( async () => {
-    await getFavorites();
-    await collectArtPieces();
+    // if (!!state.favorites.length) {
+      await getFavorites();
+    // }
+    if (!!state.ids.length) {
+      await collectArtPieces();
+    }
   }, [state.ids])
 
   return (
