@@ -34,11 +34,13 @@ function App() {
   }
 
   const collectArtPieces = () => {
-    const shuffledPieces = shuffleItems(state.ids);
+    // const shuffledPieces = shuffleItems(state.ids);
+    const pieces = state.ids;
     const wall = [];
 
     for (var i = 0; i < 7; i++) {
-      const artPiece = getSingleArtPiece(shuffledPieces[i])
+      // const artPiece = getSingleArtPiece(shuffledPieces[i])
+      const artPiece = getSingleArtPiece(pieces[i])
       wall.push(artPiece);
     }
 
@@ -57,14 +59,18 @@ function App() {
     })
   }
 
+  const displayFavoritesPage = () => {
+    return !!state.favorites.length ? <FavoriteSection favorites={state.favorites}/> : <h1>You currently have no saved favorites...</h1>
+  }
+
   useEffect(() => {
     getIDs(searchTerm);
   }, [])
 
   useEffect( async () => {
-    // if (!!state.favorites.length) {
+    if (!!state.favorites.length) {
       await getFavorites();
-    // }
+    }
     if (!!state.ids.length) {
       await collectArtPieces();
     }
@@ -84,8 +90,11 @@ function App() {
             )}
             /> 
           <Route exact path="/favorites" render={() => {
-            console.log(state.favorites)
-            return <FavoriteSection favorites={state.favorites}/>
+            // console.log(state.favorites)
+            return (
+              displayFavoritesPage()
+            )
+            // return <FavoriteSection favorites={state.favorites}/>
           }}/>
           <Route exact path='/:artPieceID' render={({ match }) => {
             const { artPieceID } = match.params;
