@@ -4,13 +4,17 @@ import { Link } from 'react-router-dom';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Tooltip } from '@material-ui/core';
-import FavoriteButton from '../FavoriteButton/FavoriteButton.js';
-
 import './Artwork.scss';
 import '../Wall/Wall.scss';
 
-const Artwork = ({ artPiece, id, url, title, wallLocation }) => {
-  const [isFavorited, setIsFavorited] = useState(false);
+const Artwork = ({ 
+  artPiece, 
+  id, 
+  url, 
+  title, 
+  wallLocation 
+}) => {
+  const [isFavorited, setIsFavorited] = useState(artPiece.isFavorited);
   const [state, dispatch] = useAppContext();
   const actionType = isFavorited === false ? 'ADD_TO_FAVORITES' : 'REMOVE_FROM_FAVORITES';
 
@@ -21,7 +25,7 @@ const Artwork = ({ artPiece, id, url, title, wallLocation }) => {
   }
   
   const toggleFavorite = () => {
-    isFavorited === false ? setIsFavorited(true) : setIsFavorited(false);
+    setIsFavorited(!isFavorited)
   }
 
   const checkFavStatus = () => {
@@ -46,7 +50,6 @@ const Artwork = ({ artPiece, id, url, title, wallLocation }) => {
         dispatch({ type: actionType, payload: artPiece })
         toggleFavorite()
       }}>{checkFavStatus()}</button>
-      <FavoriteButton/>
       <Link to={`/${id}`} data={id} className={`img-container ${wallLocation}`}>
         <img src={url} alt={`${title}_${id}`}/>
       </Link>
