@@ -7,13 +7,11 @@ import { AppProvider } from './AppContext.js';
 
 
 ReactDOM.render(
-  <React.StrictMode>
     <AppProvider>
       <Router>
           <App />
       </Router>
-    </AppProvider>
-  </React.StrictMode>,
+    </AppProvider>,
   document.getElementById('root')
 );
 
