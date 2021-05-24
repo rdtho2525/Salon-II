@@ -11,10 +11,16 @@ const initialState = {
 }
 
 const reducer = (state, action) => {
+  const storedFavorites = JSON.parse(localStorage.getItem('favorites'));
+
   switch(action.type) {
     case 'GET_IDS':
         return {...state, ids: action.payload}
-    case 'COLLECT_ARTPIECES': 
+    case 'COLLECT_ARTPIECES':
+      const ids = !!storedFavorites && storedFavorites.map(fav => fav.objectID);
+      action.payload.forEach(item => {
+        !!ids && ids.includes(item.objectID) ? item.isFavorited = true : item.isFavorited = false;
+      });
       return {...state, artPieces: action.payload}
     case 'GET_SINGLE_PIECE':
       return state.artPieces.filter(piece => piece.objectID !== action.payload)
@@ -22,12 +28,12 @@ const reducer = (state, action) => {
       // const uniqueFavorites = action.payload.filter((item, index, arr) => arr.indexOf(item) === index)
       return {...state, favorites: action.payload}
     case 'ADD_TO_FAVORITES':
-      const pastFavorites = JSON.parse(localStorage.getItem('favorites'));
-      pastFavorites ? localStorage.setItem('favorites', JSON.stringify([...pastFavorites, action.payload])) : localStorage.setItem('favorites', JSON.stringify([action.payload]));
-      return {...state, favorites: [...pastFavorites, action.payload]}
+      action.payload.isFavorited = true;
+      storedFavorites ? localStorage.setItem('favorites', JSON.stringify([...storedFavorites, action.payload])) : localStorage.setItem('favorites', JSON.stringify([action.payload]));
+      return {...state, favorites: [...storedFavorites, action.payload]}
     case 'REMOVE_FROM_FAVORITES':
-      const presetFavorites = JSON.parse(localStorage.getItem('favorites'));
-      const filteredFavorites = presetFavorites.filter(favorite => favorite.objectID !== action.payload.objectID)
+      action.payload.isFavorited = false;
+      const filteredFavorites = storedFavorites.filter(favorite => favorite.objectID !== action.payload.objectID)
       localStorage.setItem('favorites', JSON.stringify(filteredFavorites))
       return {...state, favorites: [...filteredFavorites]}
   }
